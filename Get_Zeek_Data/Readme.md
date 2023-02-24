@@ -5,6 +5,24 @@ This code creates an HTTP server listening on port 4000. When the root URL is re
 
 There's also commented-out code that shows an alternative implementation that reads the content of the same file, splits it into lines, filters out empty lines, counts the number of lines, and returns a string that includes the count and the non-empty lines separated by line breaks. This alternative implementation uses the readFile function instead of a createReadStream, and listens on port 8080 instead of 4000.
 
+This is a Node.js script that creates an HTTP server and handles requests to different URL endpoints. The server reads log files and returns the data in JSON format to the client.
+
+The server handles the following endpoints:
+
+/conn: returns the contents of the conn.log file
+/dns: returns the contents of the dns.log file
+/capture_loss: returns the contents of the capture_loss.log file
+/notice: returns the contents of the notice.log file
+/stats: returns the contents of the stats.log file
+/stderr: returns the contents of the stderr.log file
+/stdout: returns the contents of the stdout.log file
+For each endpoint, the server reads the corresponding log file using fs.createReadStream, accumulates the data in a string variable using the 'data' event, processes the data (in this case, splitting it into an array of lines and removing empty lines), and then sends the result back to the client in JSON format using res.end. If there is an error reading the file, the server returns a 500 error with the error message.
+
+
+
+
+Regenerate response
+
 <b>Step 1:</b>   <i>npm init -y</i> <br/>
 <b>Step 2:</b>   <i>npm install express</i> <br/>
 <b>Step 3:</b>   On Windows <i>npm start</i>  and on Ubuntu <i> sudo npm start</i> <br/>
