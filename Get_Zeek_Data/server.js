@@ -54,6 +54,30 @@ http.createServer((req, res) => {
         });
     } 
     
+    // dhcp: returns the contents of the dhcp.log file
+    else if (req.url === '/dns') {
+        const readStream = fs.createReadStream('/opt/zeek/logs/current/dhcp.log');
+        let logData = '';
+
+        readStream.on('data', (chunk) => {
+            logData += chunk;
+        });
+
+        readStream.on('end', () => {
+            const dataArray = logData.split('\n').filter(line => line.trim() !== '');
+            const count = dataArray.length;
+            const jsonData = JSON.stringify({ count: count, data: dataArray });
+            // const jsonData = JSON.stringify({ data: logData });
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(jsonData);
+        });
+
+        readStream.on('error', (error) => {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end(`Error reading file: ${error}`);
+        });
+    } 
+    
     //capture_loss: returns the contents of the capture_loss.log file
     else if (req.url === '/capture_loss') {
         const readStream = fs.createReadStream('/opt/zeek/logs/current/capture_loss.log');
@@ -78,9 +102,81 @@ http.createServer((req, res) => {
         });
     } 
     
+     //http: returns the contents of the http.log file
+    else if (req.url === '/notice') {
+        const readStream = fs.createReadStream('/opt/zeek/logs/current/http.log');
+        let logData = '';
+
+        readStream.on('data', (chunk) => {
+            logData += chunk;
+        });
+
+        readStream.on('end', () => {
+            const dataArray = logData.split('\n').filter(line => line.trim() !== '');
+            const count = dataArray.length;
+            const jsonData = JSON.stringify({ count: count, data: dataArray });
+            // const jsonData = JSON.stringify({ data: logData });
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(jsonData);
+        });
+
+        readStream.on('error', (error) => {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end(`Error reading file: ${error}`);
+        });
+    }
+    
     //notice: returns the contents of the notice.log file
     else if (req.url === '/notice') {
         const readStream = fs.createReadStream('/opt/zeek/logs/current/notice.log');
+        let logData = '';
+
+        readStream.on('data', (chunk) => {
+            logData += chunk;
+        });
+
+        readStream.on('end', () => {
+            const dataArray = logData.split('\n').filter(line => line.trim() !== '');
+            const count = dataArray.length;
+            const jsonData = JSON.stringify({ count: count, data: dataArray });
+            // const jsonData = JSON.stringify({ data: logData });
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(jsonData);
+        });
+
+        readStream.on('error', (error) => {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end(`Error reading file: ${error}`);
+        });
+    }
+    
+    //ntp: returns the contents of the ntp.log file
+    else if (req.url === '/notice') {
+        const readStream = fs.createReadStream('/opt/zeek/logs/current/ntp.log');
+        let logData = '';
+
+        readStream.on('data', (chunk) => {
+            logData += chunk;
+        });
+
+        readStream.on('end', () => {
+            const dataArray = logData.split('\n').filter(line => line.trim() !== '');
+            const count = dataArray.length;
+            const jsonData = JSON.stringify({ count: count, data: dataArray });
+            // const jsonData = JSON.stringify({ data: logData });
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(jsonData);
+        });
+
+        readStream.on('error', (error) => {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end(`Error reading file: ${error}`);
+        });
+    }
+    
+     //ssl: returns the contents of the ssl.log file
+    else if (req.url === '/notice') {
+        const readStream = fs.createReadStream('/opt/zeek/logs/current/ssl.log');
         let logData = '';
 
         readStream.on('data', (chunk) => {
@@ -174,6 +270,31 @@ http.createServer((req, res) => {
             res.end(`Error reading file: ${error}`);
         });
     }
+    
+    //weird: returns the contents of the weird.log file
+    else if (req.url === '/stdout') {
+        const readStream = fs.createReadStream('/opt/zeek/logs/current/weird.log');
+        let logData = '';
+
+        readStream.on('data', (chunk) => {
+            logData += chunk;
+        });
+
+        readStream.on('end', () => {
+            const dataArray = logData.split('\n').filter(line => line.trim() !== '');
+            const count = dataArray.length;
+            const jsonData = JSON.stringify({ count: count, data: dataArray });
+            // const jsonData = JSON.stringify({ data: logData });
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(jsonData);
+        });
+
+        readStream.on('error', (error) => {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end(`Error reading file: ${error}`);
+        });
+    }
+    
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Page not found');
