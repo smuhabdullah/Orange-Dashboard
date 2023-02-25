@@ -55,7 +55,7 @@ http.createServer((req, res) => {
     } 
     
     // dhcp: returns the contents of the dhcp.log file
-    else if (req.url === '/dns') {
+    else if (req.url === '/dhcp') {
         const readStream = fs.createReadStream('/opt/zeek/logs/current/dhcp.log');
         let logData = '';
 
@@ -103,7 +103,7 @@ http.createServer((req, res) => {
     } 
     
      //http: returns the contents of the http.log file
-    else if (req.url === '/notice') {
+    else if (req.url === '/http') {
         const readStream = fs.createReadStream('/opt/zeek/logs/current/http.log');
         let logData = '';
 
@@ -151,7 +151,7 @@ http.createServer((req, res) => {
     }
     
     //ntp: returns the contents of the ntp.log file
-    else if (req.url === '/notice') {
+    else if (req.url === '/ntp') {
         const readStream = fs.createReadStream('/opt/zeek/logs/current/ntp.log');
         let logData = '';
 
@@ -175,7 +175,7 @@ http.createServer((req, res) => {
     }
     
      //ssl: returns the contents of the ssl.log file
-    else if (req.url === '/notice') {
+    else if (req.url === '/ssl') {
         const readStream = fs.createReadStream('/opt/zeek/logs/current/ssl.log');
         let logData = '';
 
@@ -272,7 +272,7 @@ http.createServer((req, res) => {
     }
     
     //weird: returns the contents of the weird.log file
-    else if (req.url === '/stdout') {
+    else if (req.url === '/weird') {
         const readStream = fs.createReadStream('/opt/zeek/logs/current/weird.log');
         let logData = '';
 
