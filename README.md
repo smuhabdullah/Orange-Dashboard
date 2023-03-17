@@ -1,3 +1,28 @@
+
+
+
+# Orange Dashboard
+
+The Orange Dashboard is a web-based platform that enables users to monitor network traffic and security incidents. The dashboard is built using Node.js and React.js, and it retrieves data from two network security monitoring tools, Zeek and Suricata. The data is stored in a database, which is then queried and displayed on the dashboard in a user-friendly format.
+<br>
+## Features <br>
+The Orange Dashboard provides a range of features that make it a useful tool for monitoring network security, 
+<br>
+including:<br>
+Real-time monitoring of network traffic and security incidents<br>
+Customizable dashboard layout<br>
+Detailed information about network events, including timestamp, source and destination IP addresses, and port numbers<br>
+Integrated charts and graphs for visualizing network activity<br>
+Export functionality for exporting data to a CSV file<br>
+User authentication and authorization to control access to the dashboard<br>
+Technologies Used<br>
+The Orange Dashboard is built using a range of modern web development technologies, including:<br>
+
+Node.js: A JavaScript runtime built on Chrome's V8 JavaScript engine.<br>
+React.js: A JavaScript library for building user interfaces.<br>
+Express.js: A web application framework for Node.js.<br>
+Chart.js: A JavaScript charting library for creating interactive charts and graphs<br>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
