@@ -1,0 +1,60 @@
+<div>
+    <canvas id="myChart" ></canvas>
+    <button onclick="updataChart()">Fetch Now</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    //   async function fetchData(){
+    //     const url = 'conn.log';
+    //     const response = await fetch(url);
+    //     const datapoints = await response.json();
+    //     console.log(datapoints); 
+    //   };
+
+    function updataChart() {
+        async function fetchData() {
+            const url = 'conn.log';
+            const response = await fetch(url);
+            const datapoints = await response.json();
+            console.log(datapoints);
+            return datapoints;
+        };
+        fetchData().then(datapoints => {
+            const uid = datapoints.Zeek.map(
+                function (index) {
+                    return index.uid;
+                });
+            const orig_pkts = datapoints.Zeek.map(
+                function (index) {
+                    return index.orig_pkts;
+                })
+            console.log(uid);
+            console.log(orig_pkts);
+            myChart.config.data.labels = uid;
+            myChart.config.data.datasets[0].data = orig_pkts;
+            myChart.update();
+        });
+    }
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['id.orig_h', 'id.orig_p', 'local_orig', 'missed_bytes', 'orig_ip_bytes', 'resp_ip_bytes'],
+            datasets: [{
+                label: '#',
+                data: [12, 19, 3, 1, 12, 10],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

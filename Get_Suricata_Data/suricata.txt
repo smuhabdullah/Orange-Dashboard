@@ -1,0 +1,147 @@
+// const express = require('express');
+// const fs = require('fs');
+// const { Client } = require('cassandra-driver');
+// const moment = require('moment');
+
+// const app = express();
+// const port = 3000;
+
+// const client = new Client({
+//   contactPoints: ['localhost'],
+//   localDataCenter: 'datacenter1',
+//   keyspace: 'my_keyspace',
+// });
+
+// app.get('/store-data', async (req, res) => {
+//   try {
+//     const logfile = fs.readFileSync('/var/log/suricata/eve.json', 'utf8');
+//     const lines = logfile.trim().split('\n');
+//     const data = lines.map((line) => {
+//       const fields = JSON.parse(line);
+//       return {
+//         timestamp: moment(fields.timestamp).toDate(),
+//         event_type: fields.event_type || null,
+//         source_ip: fields.src_ip || null,
+//         dest_ip: fields.dest_ip || null,
+//         protocol: fields.proto || null,
+//         src_port: fields.src_port || null,
+//         dest_port: fields.dest_port || null,
+//         http_host: fields.http?.hostname || null,
+//         http_url: fields.http?.url || null,
+//         http_user_agent: fields.http?.user_agent || null,
+//         http_content_type: fields.http?.http_content_type || null,
+//         http_method: fields.http?.http_method || null,
+//         http_referer: fields.http?.http_referer || null,
+//         http_status: fields.http?.http_status || null,
+//         alert_signature_id: fields.alert?.signature_id || null,
+//         alert_signature: fields.alert?.signature || null,
+//         http_response_body: fields.http?.http_response_body || null,
+//       };
+//     });
+//     const validData = data.filter((d) => d.timestamp);
+//     if (validData.length === 0) {
+//       console.log('No valid records to insert into Cassandra');
+//       return res.send('No valid records to insert into Cassandra');
+//     }
+//     const query = 'INSERT INTO events (timestamp, event_type, source_ip, dest_ip, protocol, src_port, dest_port, http_host, http_url, http_user_agent, http_content_type, http_method, http_referer, http_status, alert_signature_id, alert_signature, http_response_body) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+//     const promises = validData.map((d) => client.execute(query, Object.values(d)));
+//     await Promise.all(promises);
+//     console.log(`Inserted ${validData.length} records into Cassandra`);
+//     return res.send(`Inserted ${validData.length} records into Cassandra`);
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).send(error.message);
+//   }
+// });
+
+// app.listen(port, () => {
+//   console.log(`Server running on port ${port}`);
+// });
+
+
+// const express = require('express');
+// const app = express();
+// const fs = require('fs');
+
+// app.get('/eve', (req, res) => {
+//   const filePath = '/var/log/suricata/eve.json';
+//   fs.readFile(filePath, 'utf8', (err, data) => {
+//     if (err) {
+//       console.error(err);
+//       res.status(500).send('Internal Server Error');
+//     } else {
+//       res.send(data);
+//     }
+//   });
+// });
+
+// app.listen(3000, () => {
+//   console.log('Server running on port 3000');
+// });
+
+const fs = require('fs');
+const express = require('express');
+
+const app = express();
+
+app.get('/eve', (req, res) => {
+  const readStream = fs.createReadStream('/var/log/suricata/eve.json');
+  readStream.pipe(res);
+});
+
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
+
+
+// const fs = require('fs');
+// const express = require('express');
+
+// const app = express();
+
+// app.get('/eve', (req, res) => {
+//   const readStream = fs.createReadStream('/var/log/suricata/eve.json');
+//   let rawData = '';
+//   readStream.on('data', (chunk) => {
+//     rawData += chunk;
+//   });
+//   readStream.on('end', () => {
+//     try {
+//       const parsedData = JSON.parse(rawData);
+//       res.json(parsedData);
+//     } catch (err) {
+//       res.status(500).json({ error: err.message });
+//     }
+//   });
+// });
+
+// app.listen(3000, () => {
+//   console.log('Server running on port 3000');
+// });
+// const fs = require('fs');
+// const JSONStream = require('JSONStream');
+
+// const filePath = '/var/log/suricata/eve.json';
+// const stream = fs.createReadStream(filePath, { encoding: 'utf8' });
+
+// // Use JSONStream to parse the data and emit objects one at a time
+// const parser = JSONStream.parse('*.*');
+// stream.pipe(parser);
+
+// // Pipe the parsed objects to a writable stream
+// const writableStream = fs.createWriteStream('output.json');
+
+// parser.on('data', data => {
+//   // Do something with each parsed object, such as writing it to a file
+//   writableStream.write(JSON.stringify(data));
+// });
+
+// parser.on('end', () => {
+//   // Clean up resources when parsing is complete
+//   writableStream.end();
+//   console.log('Finished reading file.');
+// });
+
+// stream.on('error', error => {
+//   console.error('Error reading file:', error);
+// });
