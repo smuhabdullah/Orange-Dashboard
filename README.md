@@ -5,6 +5,18 @@
 
 The Orange Dashboard is a web-based platform that enables users to monitor network traffic and security incidents. The dashboard is built using Node.js and React.js, and it retrieves data from two network security monitoring tools, Zeek and Suricata. The data is stored in a database, which is then queried and displayed on the dashboard in a user-friendly format.
 <br>
+
+![image](https://user-images.githubusercontent.com/58034394/228033908-e1e2ec5e-2689-4de1-9689-c1d5e9b66c0d.png)
+![image](https://user-images.githubusercontent.com/58034394/228033972-5866f617-53b3-439e-b138-4d7af6abab33.png)
+![image](https://user-images.githubusercontent.com/58034394/228034110-53344c74-38aa-43d8-8bea-5a4513e851a1.png)
+![image](https://user-images.githubusercontent.com/58034394/228034158-cc9ec9d1-4477-4994-a1a7-80f6d51cdb82.png)
+![image](https://user-images.githubusercontent.com/58034394/228034228-e0279971-f066-4b39-9ffe-afc43f61d6a9.png)
+![image](https://user-images.githubusercontent.com/58034394/228034290-7e4eae21-fb63-447a-87f0-e067cda671ed.png)
+![image](https://user-images.githubusercontent.com/58034394/228034450-988dbac6-df73-4309-8d10-a2a260e34f3a.png)
+![image](https://user-images.githubusercontent.com/58034394/228034492-0e9df523-cff3-404c-8e15-f9830e2a634c.png)
+![image](https://user-images.githubusercontent.com/58034394/228036192-454595a7-b44f-47d1-9d61-d8989c79dc5f.png)
+![image](https://user-images.githubusercontent.com/58034394/228036444-7cc585d8-5708-44cb-84ad-afbe137548c3.png)
+
 ## Features <br>
 The Orange Dashboard provides a range of features that make it a useful tool for monitoring network security, 
 <br>
